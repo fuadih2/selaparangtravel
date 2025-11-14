@@ -1,0 +1,567 @@
+/* src/styles.css */
+
+/* --- Tema Warna & Variabel Global --- */
+:root {
+  /* Warna Utama (Dark Theme) */
+  --bg-primary: #1a1d23; /* Latar belakang utama yang sangat gelap */
+  --bg-secondary: #22262e; /* Latar untuk sidebar dan kartu */
+  --bg-tertiary: #2d3139; /* Latar untuk input dan hover */
+  --text-primary: #e4e6eb; /* Teks utama (putih/abu-abu muda) */
+  --text-secondary: #9ca3af; /* Teks sekunder (abu-abu) */
+  --text-muted: #6b7280; /* Teks redup (abu-abu tua) */
+
+  /* Aksen & Interaksi */
+  --accent-color: #10b981; /* Hijau teal untuk aksi utama */
+  --accent-hover: #059669; /* Hijau teal saat hover */
+  --danger-color: #ef4444; /* Merah untuk aksi berbahaya */
+  --danger-hover: #dc2626; /* Merah saat hover */
+  --border-color: #374151; /* Batas yang halus */
+
+  /* Tipografi & Bentuk */
+  --font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  --border-radius: 12px;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* --- Reset & Global Styles --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Layout Utama --- */
+.app-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+  width: 260px;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-color);
+}
+
+.sidebar-header {
+  padding: 24px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.sidebar-nav {
+  flex-grow: 1;
+  padding: 16px 0;
+  overflow-y: auto;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 14px 24px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+}
+
+.nav-link.active {
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+}
+
+/* Indikator aktif di sidebar */
+.nav-link.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: var(--accent-color);
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+/* --- Main Content --- */
+.main-content {
+  flex-grow: 1;
+  padding: 32px;
+  overflow-y: auto;
+  background-color: var(--bg-primary);
+}
+
+.page {
+  display: none;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.page.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+}
+
+/* --- Komponen Kartu --- */
+.card,
+.form-card {
+  background-color: var(--bg-secondary);
+  padding: 24px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+}
+
+/* --- Dashboard --- */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.dashboard-grid .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 32px 24px;
+}
+
+.card h3 {
+  margin: 0 0 8px 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.card p {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin: 0;
+}
+
+/* --- Form --- */
+#transactionForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+fieldset {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  margin: 0;
+}
+
+legend {
+  padding: 0 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.form-group input[readonly] {
+  background-color: var(--bg-primary);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+/* --- Tombol --- */
+.submit-btn,
+.secondary-btn,
+.view-btn,
+.delete-btn {
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: none;
+}
+
+.submit-btn {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 14px 28px;
+  font-size: 1rem;
+  align-self: flex-end;
+}
+
+.submit-btn:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.secondary-btn,
+.view-btn {
+  background-color: #4b5563;
+  color: white;
+  padding: 10px 20px;
+  font-size: 0.875rem;
+}
+
+.secondary-btn:hover,
+.view-btn:hover {
+  background-color: #374151;
+  transform: translateY(-1px);
+}
+
+.delete-btn {
+  background-color: var(--danger-color);
+  color: white;
+  padding: 8px 16px;
+  font-size: 0.8rem;
+}
+
+.delete-btn:hover {
+  background-color: var(--danger-hover);
+}
+
+/* --- Tabel --- */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--bg-secondary);
+}
+
+th,
+td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+thead th {
+  background-color: var(--bg-tertiary);
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+tbody tr {
+  transition: background-color 0.2s ease-in-out;
+}
+
+tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02); /* Subtle zebra-striping */
+}
+
+tbody tr:hover {
+  background-color: var(--bg-tertiary);
+}
+
+/* --- Modal --- */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal-overlay.active {
+  display: flex;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-content {
+  background-color: var(--bg-secondary);
+  padding: 32px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-xl);
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+  border: 1px solid var(--border-color);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.modal-close-btn:hover {
+  color: var(--text-primary);
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  text-align: center;
+  color: var(--text-primary);
+}
+
+.modal-details-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.detail-item strong {
+  color: var(--text-secondary);
+}
+
+.detail-item span {
+  color: var(--text-primary);
+  text-align: right;
+  font-weight: 500;
+}
+
+/* --- Laporan --- */
+/* --- Gaya untuk Laporan (BARU) --- */
+.report-content {
+  margin-top: 32px;
+  background-color: var(--bg-secondary);
+  padding: 24px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+}
+
+.report-content h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.report-content h4 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.report-summary p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+/* Gaya untuk .report-table sudah tidak perlu lagi, karena akan mewarisi dari gaya 'table' umum */
+
+/* --- Pengaturan --- */
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.settings-grid button {
+  padding: 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: all 0.2s ease-in-out;
+  text-align: left;
+}
+
+.settings-grid button:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--accent-color);
+}
+
+/* --- Utilitas & Helper --- */
+.text-center {
+  text-align: center;
+}
+.mt-20 {
+  margin-top: 20px;
+}
+
+/* --- Print Styles --- */
+@media print {
+  body,
+  .main-content {
+    background-color: #fff !important;
+    color: #000 !important;
+  }
+  body * {
+    visibility: hidden;
+  }
+  .main-content,
+  .main-content * {
+    visibility: visible;
+  }
+  .main-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  .sidebar,
+  .form-card,
+  .settings-grid,
+  button,
+  .modal-overlay,
+  .nav-link {
+    display: none !important;
+  }
+  #reports,
+  .page {
+    display: block !important;
+  }
+  .card,
+  .form-card,
+  .report-content {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+  th,
+  td {
+    border: 1px solid #ccc !important;
+  }
+}
+/* --- Gaya untuk Data Controls (BARU) --- */
+.data-controls {
+  background-color: var(--bg-secondary);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  margin-bottom: 24px;
+  border: 1px solid var(--border-color);
+}
+
+.data-controls .form-row {
+  align-items: flex-end; /* Sejajarkan tombol ke bawah */
+}
+
+.data-controls .form-group label {
+  font-size: 0.875rem;
+  margin-bottom: 8px;
+}
+
+.data-controls .form-group input,
+.data-controls .form-group select {
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+}

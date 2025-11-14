@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Selaparang Travel</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Sidebar Navigasi -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <h1>✈️ Selaparang Travel</h1>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="#" data-page="dashboard" class="nav-link active"
+            >📊 Dashboard</a
+          >
+          <a href="#" data-page="transaction" class="nav-link">➕ Transaksi</a>
+          <a href="#" data-page="data" class="nav-link">🗃️ Data</a>
+          <a href="#" data-page="reports" class="nav-link">📈 Laporan</a>
+          <a href="#" data-page="settings" class="nav-link">⚙️ Pengaturan</a>
+        </nav>
+      </aside>
+
+      <!-- Konten Utama -->
+      <main class="main-content">
+        <!-- Halaman: Dashboard -->
+        <section id="dashboard" class="page active">
+          <h2>Dashboard</h2>
+          <div class="dashboard-grid">
+            <div class="card">
+              <h3>Total Penumpang (Bulan Ini)</h3>
+              <p id="totalPassengersThisMonth">...</p>
+            </div>
+            <div class="card">
+              <h3>Total Pendapatan (Bulan Ini)</h3>
+              <p id="totalRevenueThisMonth">...</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Halaman: Transaksi -->
+        <section id="transaction" class="page">
+          <h2>Tambah Transaksi Baru</h2>
+          <form id="transactionForm" class="form-card">
+            <!-- Fieldset: Detail Penumpang -->
+            <fieldset>
+              <legend>👤 Detail Penumpang</legend>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="passengerName">Nama</label>
+                  <input type="text" id="passengerName" required />
+                </div>
+                <div class="form-group">
+                  <label for="passengerPhone">No. HP</label>
+                  <input type="tel" id="passengerPhone" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="bookingDate">Tanggal Booking</label>
+                  <input type="date" id="bookingDate" required />
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Fieldset: Rute Perjalanan -->
+            <fieldset>
+              <legend>🗺️ Rute Perjalanan</legend>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="travelType">Jenis</label>
+                  <select id="travelType" required>
+                    <option value="Pesawat">✈️ Pesawat</option>
+                    <option value="Kapal">🚢 Kapal</option>
+                    <option value="Bus">🚌 Bus</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="travelDate">Tanggal Berangkat</label>
+                  <input type="date" id="travelDate" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="departure">Dari</label>
+                  <input type="text" id="departure" required />
+                </div>
+                <div class="form-group">
+                  <label for="arrival">Ke</label>
+                  <input type="text" id="arrival" required />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="flightNumber" id="transportLabel"
+                    >Nomor Penerbangan</label
+                  >
+                  <input
+                    type="text"
+                    id="flightNumber"
+                    placeholder="Contoh: GA 123"
+                    required
+                  />
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Fieldset: Detail Pembayaran -->
+            <fieldset>
+              <legend>💳 Detail Pembayaran</legend>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="adultPrice">Adult STD</label>
+                  <input
+                    type="number"
+                    id="adultPrice"
+                    placeholder="0"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="infantPrice">Infun NTA</label>
+                  <input
+                    type="number"
+                    id="infantPrice"
+                    placeholder="0"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="totalAmount">Amount</label>
+                  <input
+                    type="text"
+                    id="totalAmount"
+                    readonly
+                    placeholder="Akan dihitung otomatis"
+                  />
+                </div>
+              </div>
+            </fieldset>
+            <button type="submit" class="submit-btn">
+              💾 Simpan Transaksi
+            </button>
+          </form>
+        </section>
+
+        <!-- Halaman: Data -->
+        <section id="data" class="page">
+          <h2>Semua Data Transaksi</h2>
+
+          <!-- Kontrol Pencarian & Filter -->
+          <div class="data-controls">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="searchInput"
+                  >Cari Nama, Rute, atau Transportasi</label
+                >
+                <input
+                  type="text"
+                  id="searchInput"
+                  placeholder="Ketik untuk mencari..."
+                />
+              </div>
+              <div class="form-group">
+                <label for="filterType">Filter Jenis</label>
+                <select id="filterType">
+                  <option value="all">Semua Jenis</option>
+                  <option value="Pesawat">✈️ Pesawat</option>
+                  <option value="Kapal">🚢 Kapal</option>
+                  <option value="Bus">🚌 Bus</option>
+                </select>
+              </div>
+              <div class="form-group" style="align-self: flex-end">
+                <button id="resetFilterBtn" class="secondary-btn">
+                  🔄 Reset
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table id="dataTable">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Tgl Booking</th>
+                  <th>Tgl Berangkat</th>
+                  <th>Nama</th>
+                  <th>Rute</th>
+                  <th>Transportasi</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="dataBody">
+                <!-- Data akan ditampilkan di sini -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Halaman: Laporan -->
+        <section id="reports" class="page">
+          <h2>Buat Laporan Bulanan</h2>
+          <div class="form-card">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="reportMonth">Pilih Bulan & Tahun</label>
+                <input type="month" id="reportMonth" required />
+              </div>
+              <div class="form-group">
+                <label for="reportCategory">Pilih Kategori</label>
+                <select id="reportCategory">
+                  <option value="all">Semua Kategori</option>
+                  <option value="Pesawat">✈️ Pesawat</option>
+                  <option value="Kapal">🚢 Kapal</option>
+                  <option value="Bus">🚌 Bus</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <button id="generateReportBtn">📊 Tampilkan Laporan</button>
+              <button id="printReportBtn" class="secondary-btn">
+                🖨️ Cetak
+              </button>
+              <button id="exportExcelBtn" class="secondary-btn">
+                📥 Export ke Excel
+              </button>
+            </div>
+          </div>
+          <div id="reportContent" class="report-content">
+            <!-- Konten laporan akan di-generate di sini -->
+          </div>
+        </section>
+
+        <!-- Halaman: Pengaturan -->
+        <section id="settings" class="page">
+          <h2>Pengaturan & Utilitas</h2>
+          <div class="settings-grid">
+            <button id="exportDataBtn">📥 Export Semua Data ke Excel</button>
+            <button id="backupDbBtn">💾 Backup Database</button>
+            <button id="restoreDbBtn">♻️ Restore Database</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Modal Detail Transaksi -->
+    <div id="detailModal" class="modal-overlay">
+      <div class="modal-content">
+        <span class="modal-close-btn">&times;</span>
+        <h2>Detail Transaksi</h2>
+        <div class="modal-details-grid">
+          <div class="detail-item">
+            <strong>Nama Penumpang:</strong> <span id="detail-name"></span>
+          </div>
+          <div class="detail-item">
+            <strong>No. HP:</strong> <span id="detail-phone"></span>
+          </div>
+          <div class="detail-item">
+            <strong>Tanggal Booking:</strong>
+            <span id="detail-booking-date"></span>
+          </div>
+          <div class="detail-item">
+            <strong>Jenis Perjalanan:</strong> <span id="detail-type"></span>
+          </div>
+          <div class="detail-item">
+            <strong>Nomor Transportasi:</strong>
+            <span id="detail-flight-number"></span>
+          </div>
+          <div class="detail-item">
+            <strong>Rute:</strong> <span id="detail-route"></span>
+          </div>
+          <div class="detail-item">
+            <strong>Tanggal Berangkat:</strong>
+            <span id="detail-travel-date"></span>
+          </div>
+          <div class="detail-item">
+            <strong>Adult STD:</strong> <span id="detail-adult-price"></span>
+          </div>
+          <div class="detail-item">
+            <strong>Infun NTA:</strong> <span id="detail-infant-price"></span>
+          </div>
+          <div class="detail-item">
+            <strong>Amount:</strong> <span id="detail-amount"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Link ke file JavaScript -->
+    <script src="main_logic.js"></script>
+  </body>
+</html>
