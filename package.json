@@ -23,6 +23,7 @@
   "build": {
     "appId": "com.selaparangtravel.pro",
     "productName": "Selaparang Travel",
+    "publish": null,
     "directories": {
       "output": "dist"
     },
