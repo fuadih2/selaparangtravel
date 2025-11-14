@@ -1,0 +1,49 @@
+# Nama workflow
+name: Build for Windows
+
+# TRIGGER: Kapan workflow ini dijalankan
+# TIDAK ADA SPASI di awal baris 'on'
+on:
+  # Jalankan saat ada push ke branch 'main'
+  push:
+    branches: [main]
+  # Jalankan saat ada pull request ke branch 'main'
+  pull_request:
+    branches: [main]
+  # Izinkan untuk dijalankan manual dari halaman Actions
+  workflow_dispatch:
+
+# Definisi pekerjaan yang akan dijalankan
+jobs:
+  # Nama pekerjaan
+  build:
+    # Gunakan runner Windows
+    runs-on: windows-latest
+
+    # Langkah-langkah pekerjaan
+    steps:
+      # Langkah 1: Checkout kode
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Langkah 2: Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      # Langkah 3: Install dependensi
+      - name: Install dependencies
+        run: npm install
+
+      # Langkah 4: Build aplikasi
+      - name: Build Electron app for Windows
+        run: npm run dist:win
+
+      # Langkah 5: Upload hasil build
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows-Installer-x64
+          path: dist/*.exe
